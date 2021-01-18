@@ -1,0 +1,130 @@
+﻿@model MitSuLån.Models.ViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <title>View</title>
+</head>
+<body>
+    <div class="beregner-container">
+
+        <h1 class="beregner-title">SU Låne Beregner</h1>
+
+        <p class="description">
+            Gør du dig tanker omkring et SU lån? <br>
+            Denne låne beregner giver dig et estimat over et SU lån der er tilpasset lige til dig.
+        </p>
+
+        <div class="row1">
+
+            <div class="input-group">
+                <form action="Beregner" method="post">
+                    <div class="form-group">
+                        <label class="input-label" asp-for="SUData.MånedligSU"></label>
+                        <div class="inner-addon left-addon">
+                            <i class="fa fa-dollar" style="font-size:12px"></i>
+                            <input class="input-field" placeholder="" asp-for="SUData.MånedligSU" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="input-label" asp-for="SUData.AntalMåneder"></label>
+                        <input class="input-field" placeholder="" asp-for="SUData.AntalMåneder" />
+                    </div>
+                    <div class="form-group">
+                        <label class="input-label" asp-for="SUData.MånederFørAfbetaling"></label>
+                        <input class="input-field" placeholder="" asp-for="SUData.MånederFørAfbetaling" />
+                    </div>
+                    <div class="form-group">
+                        <label class="input-label" asp-for="SUData.MåndeligAfbetaling"></label>
+                        <input class="input-field-last" placeholder="" asp-for="SUData.MåndeligAfbetaling" />
+                        <input style="margin:auto" type="submit" value="Beregn!" class="submit-btn" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="input-group1">
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div>
+                    HELLO HELLO
+                </div>
+            </div>
+        </div>
+
+
+        <p>A Collapsible:</p>
+        <button type="button" class="collapsible">Open Collapsible</button>
+        <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <h2>---LÅN UNDER STUDIE---</h2>
+
+            <h4>Effektiv Kredit: @Model.Studie.EffektivKredit</h4>
+            <h4>Samlet Lån: @Model.Studie.SamletLån</h4>
+            <h4>Gebyr på Lån: @Model.Studie.Gebyr</h4>
+
+            <h2>---LÅN MELLEM STUDIE OG TILBAGEBETALING---</h2>
+            <h4>Samlet Lån: @Model.Mellem.SamletLån</h4>
+
+            <h2>---LÅN UNDER TILBAGEBETALING---</h2>
+            <h4>Måneders Afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</h4>
+            <h4>Samlet Lån: @Model.SamletLån</h4>
+            <h4>Gebyr på Lån: @Model.Tilbagebetaling.Gebyr</h4>
+            <h4>Sidste måneds betaling: @Model.Tilbagebetaling.SamletLån</h4>
+        </div>
+    </div>
+
+    <script>
+        //Pie chart controller
+        var modelData = [@Model.Studie.EffektivKredit, @Model.Tilbagebetaling.Gebyr];
+
+        new Chart(document.getElementById("myChart"), {
+            type: 'pie',
+            data: {
+                labels: ["Effektiv Kredit", "Renter"],
+                datasets: [{
+                    label: "Population (millions)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2"],
+                    data: [modelData[0], modelData[1]]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Renter under tilbagebetaling talt med.'
+                },
+                legend: {
+                    position: 'right'
+                }
+            }
+        });
+
+        //Collapsable views controller
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+
+
+    </script>
+
+    </body>
+</html>
