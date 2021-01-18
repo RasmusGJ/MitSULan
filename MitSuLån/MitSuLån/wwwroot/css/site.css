@@ -45,20 +45,22 @@ label {
     display: flex;
 }
 
-.input-group {
-    background-color: #f1f1f1;
+.input-group0 {
+    background-color: #edf0f2;
     border: solid;
+    border-right: none;
     border-width: 1px;
-    border-color: gray;
+    border-color: #d2d3d4;
     padding: 20px;
     flex: 40%;
 }
 
 .input-group1 {
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     border: solid;
+    border-left: none;
     border-width: 1px;
-    border-color: gray;
+    border-color: #d2d3d4;
     padding: 20px;
     flex: 60%;
 }
@@ -86,8 +88,15 @@ label {
     padding: 5px;
 }
 
-.submit-btn{
+.submit-btn {
     float: right;
+    font-weight: 500;
+    font-size: 0.87rem;
+    background-color: #1f7cff;
+    color: white;
+    height: 37px;
+    width: 100px;
+    border: none;
 }
 
 /*Collapsible section*/
