@@ -116,19 +116,26 @@ input[type=number] {
 
 /*Collapsible section*/
 .collapsible {
-    background-color: #7777;
-    color: white;
+    background-color: white;
+    color: black;
     cursor: pointer;
     padding: 18px;
     width: 100%;
-    border: none;
+    border: solid;
+    border-top: none;
+    border-width: 1px;
+    border-color: #d2d3d4;
     text-align: left;
     outline: none;
     font-size: 15px;
 }
 
 .active, .collapsible:hover {
-    background-color: #555;
+    background-color: #a9bdd6;
+    opacity: 1;
+    color: white;
+    transition: color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
 }
 
 .content {
@@ -136,6 +143,9 @@ input[type=number] {
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-out;
 }
 
 /* ICON SETTINGS */

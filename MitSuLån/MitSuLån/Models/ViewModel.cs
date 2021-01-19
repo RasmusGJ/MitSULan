@@ -10,7 +10,8 @@ namespace MitSuLån.Models
         public DisplayItem Studie { get; set; } = new DisplayItem();
         public DisplayItem Mellem { get; set; } = new DisplayItem();
         public DisplayItem Tilbagebetaling { get; set; } = new DisplayItem();
-        public double SamletLån { get; set; }
         public SUData SUData { get; set; } = new SUData();
+        public double SamletLån { get; set; }
+        public double GebyrAfbetaling { get; set; }
     }
 }

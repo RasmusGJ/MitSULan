@@ -49,6 +49,7 @@ namespace MitSuLån.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         public ViewModel FillViewModel(ViewModel vm)
         {
             ///------------///
@@ -94,12 +95,10 @@ namespace MitSuLån.Controllers
             vm.SamletLån = (vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån;
 
             //Gebyr på periode:
-            vm.Tilbagebetaling.Gebyr =
+            vm.GebyrAfbetaling = vm.SamletLån - vm.Mellem.SamletLån;
 
             //Gebyr ved lån: 
             vm.Tilbagebetaling.Gebyr = ((vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån) - (vm.SUData.MånedligSU * vm.SUData.AntalMåneder);
-
-            //Sidste månedsafbetaling:  vm.Tilbagebetaling.SamletLån;
 
             return vm;
         }

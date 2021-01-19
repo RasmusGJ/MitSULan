@@ -43,6 +43,12 @@
                         <input class="input-field" placeholder="" asp-for="SUData.MånederFørAfbetaling" />
                     </div>
                     <div class="form-group">
+                        <select class="input-field">
+                            <option>Beløb</option>
+                            <option>Måneder</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label class="input-label" asp-for="SUData.MåndeligAfbetaling"></label>
                         <input class="input-field-last" placeholder="" asp-for="SUData.MåndeligAfbetaling" />
                         <input style="margin:auto" type="submit" value="BEREGN" class="submit-btn" />
@@ -59,24 +65,25 @@
             </div>
         </div>
 
-        <button type="button" class="collapsible">Open Collapsible</button>
+        <button type="button" class="collapsible"> <i class="fa fa-arrow-down" style="float:right;"></i>Se dit låns levetid</button>
         <div class="content">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <h2>---LÅN UNDER STUDIE---</h2>
 
             <h4>Effektiv Kredit: @Model.Studie.EffektivKredit</h4>
             <h4>Samlet Lån: @Model.Studie.SamletLån</h4>
-            <h4>Gebyr på Lån: @Model.Studie.Gebyr</h4>
+            <h4>Gebyr på Periode: @Model.Studie.Gebyr</h4>
 
             <h2>---LÅN MELLEM STUDIE OG TILBAGEBETALING---</h2>
             <h4>Samlet Lån: @Model.Mellem.SamletLån</h4>
-            <h4>Gebyr under: @Model.Mellem.Gebyr</h4>
+            <h4>Gebyr på Periode: @Model.Mellem.Gebyr</h4>
 
 
             <h2>---LÅN UNDER TILBAGEBETALING---</h2>
             <h4>Måneders Afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</h4>
             <h4>Samlet Lån: @Model.SamletLån</h4>
             <h4>Gebyr på Lån: @Model.Tilbagebetaling.Gebyr</h4>
+            <h4>Gebyr på Periode: @Model.GebyrAfbetaling</h4>
             <h4>Sidste måneds betaling: @Model.Tilbagebetaling.SamletLån</h4>
         </div>
     </div>
@@ -98,7 +105,7 @@
             options: {
                 title: {
                     display: true,
-                    text: 'Renter under tilbagebetaling talt med.'
+                    text: 'Renter under tilbagebetaling inkluderet.'
                 },
                 legend: {
                     position: 'right'
@@ -119,6 +126,11 @@
                 } else {
                     content.style.display = "block";
                 }
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } 
             });
         }
     </script>
