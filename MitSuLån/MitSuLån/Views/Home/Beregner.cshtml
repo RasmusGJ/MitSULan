@@ -55,13 +55,10 @@
                     <canvas id="myChart"></canvas>
                 </div>
                 <div>
-                    HELLO HELLO
                 </div>
             </div>
         </div>
 
-
-        <p>A Collapsible:</p>
         <button type="button" class="collapsible">Open Collapsible</button>
         <div class="content">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -73,6 +70,8 @@
 
             <h2>---LÅN MELLEM STUDIE OG TILBAGEBETALING---</h2>
             <h4>Samlet Lån: @Model.Mellem.SamletLån</h4>
+            <h4>Gebyr under: @Model.Mellem.Gebyr</h4>
+
 
             <h2>---LÅN UNDER TILBAGEBETALING---</h2>
             <h4>Måneders Afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</h4>
@@ -122,9 +121,6 @@
                 }
             });
         }
-
-
     </script>
-
     </body>
 </html>

@@ -36,6 +36,22 @@ namespace MitSuLån.Controllers
         [HttpPost, Route("beregner")]
         public IActionResult Beregner(ViewModel vm)
         {
+            return View(FillViewModel(vm));
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public ViewModel FillViewModel(ViewModel vm)
+        {
+            ///------------///
             //UNDER STUDIE
             //Beregner den samlet gæld under studiet
             for (int i = 0; i < vm.SUData.AntalMåneder; i++)
@@ -43,19 +59,23 @@ namespace MitSuLån.Controllers
                 vm.Studie.SamletLån = (vm.Studie.SamletLån + vm.SUData.MånedligSU) * (1 + vm.SUData.Rente);
             }
             //Beregner effektiv kredit under studiet
-            vm.Studie.EffektivKredit =  (vm.SUData.AntalMåneder * vm.SUData.MånedligSU);
+            vm.Studie.EffektivKredit = (vm.SUData.AntalMåneder * vm.SUData.MånedligSU);
 
             //Beregner gebyr for lån
             vm.Studie.Gebyr = vm.Studie.SamletLån - (vm.SUData.AntalMåneder * vm.SUData.MånedligSU);
 
+            ///------------///
             //MELLEM STUDIE OG TILBAGEBETALING
             vm.Mellem.SamletLån = vm.Studie.SamletLån;
 
             for (int i = 0; i < vm.SUData.MånederFørAfbetaling; i++)
             {
-                vm.Mellem.SamletLån = vm.Mellem.SamletLån * (1 + (vm.SUData.Diskonto + vm.SUData.Diskonto));
+                vm.Mellem.SamletLån = vm.Mellem.SamletLån * (1 + (vm.SUData.Diskonto + vm.SUData.TillægsRente));
             }
 
+            vm.Mellem.Gebyr = vm.Mellem.SamletLån - vm.Studie.SamletLån;
+
+            ///------------///
             //LÅN UNDER TILBAGEBETALING
 
             vm.Tilbagebetaling.SamletLån = vm.Mellem.SamletLån;
@@ -71,25 +91,17 @@ namespace MitSuLån.Controllers
             vm.SUData.AntalTilbageBetalingsMåneder++;
 
             //Total pris på lån: 
-            vm.SamletLån = vm.SUData.AntalTilbageBetalingsMåneder * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån;
+            vm.SamletLån = (vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån;
+
+            //Gebyr på periode:
+            vm.Tilbagebetaling.Gebyr =
 
             //Gebyr ved lån: 
-            vm.Tilbagebetaling.Gebyr = (vm.SUData.AntalTilbageBetalingsMåneder * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån) - (vm.SUData.MånedligSU * vm.SUData.AntalMåneder);
+            vm.Tilbagebetaling.Gebyr = ((vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån) - (vm.SUData.MånedligSU * vm.SUData.AntalMåneder);
 
             //Sidste månedsafbetaling:  vm.Tilbagebetaling.SamletLån;
 
-            return View(vm);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return vm;
         }
     }
 }
