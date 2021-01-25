@@ -68,76 +68,36 @@
 
         <button type="button" class="collapsible"> <i class="fa fa-arrow-down" style="float:right;"></i>Se dit låns levetid</button>
 
-        <div class="content">
+        <div class="timeline-thingy">
 
-            <div class="content1">
-                <div class="timeline-left">
-                    <h5>
-                        Titel her omkring data
-                    </h5>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+            <div class="timeline">
+                <div class="timeline-container left">
+                    <div class="content">
+                        <h4>Lån Under Studie</h4>
+                        <p>Effektiv Kredit: @Model.Studie.EffektivKredit</p>
+                        <p>Samlet Lån: @Model.Studie.SamletLån</p>
+                        <p>Gebyr på Periode: @Model.Studie.Gebyr</p>
+                    </div>
                 </div>
-                <div class="timeline-right">
-                    <h5>
-                        Titel her omkring data
-                    </h5>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                <div class="timeline-container right">
+                    <div class="content">
+                        <h4>Lån mellem Studie og Tilbagebetaling</h4>
+                        <p>Samlet Lån: @Model.Mellem.SamletLån</p>
+                        <p>Gebyr på Periode: @Model.Mellem.Gebyr</p>
+                    </div>
                 </div>
-            </div>
-            <div class="content1">
-                <div class="timeline-left">
-                    <h5>
-                        Titel her omkring data
-                    </h5>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </div>
-                <div class="timeline-right">
-                    <h5>
-                        Titel her omkring data
-                    </h5>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                <div class="timeline-container left">
+                    <div class="content">
+                        <h4>Lån under Tilbagebetaling</h4>
+                        <p>Måneders Afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</p>
+                        <p>Samlet Lån: @Model.SamletLån</p>
+                        <p>Gebyr på Lån: @Model.Tilbagebetaling.Gebyr</p>
+                        <p>Gebyr på Periode: @Model.GebyrAfbetaling</p>
+                        <p>Sidste måneds betaling: @Model.Tilbagebetaling.SamletLån</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    <h2>---LÅN UNDER STUDIE---</h2>
-
-    <h4>Effektiv Kredit: @Model.Studie.EffektivKredit</h4>
-    <h4>Samlet Lån: @Model.Studie.SamletLån</h4>
-    <h4>Gebyr på Periode: @Model.Studie.Gebyr</h4>
-
-    <h2>---LÅN MELLEM STUDIE OG TILBAGEBETALING---</h2>
-    <h4>Samlet Lån: @Model.Mellem.SamletLån</h4>
-    <h4>Gebyr på Periode: @Model.Mellem.Gebyr</h4>
-
-    <h2>---LÅN UNDER TILBAGEBETALING---</h2>
-    <h4>Måneders Afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</h4>
-    <h4>Samlet Lån: @Model.SamletLån</h4>
-    <h4>Gebyr på Lån: @Model.Tilbagebetaling.Gebyr</h4>
-    <h4>Gebyr på Periode: @Model.GebyrAfbetaling</h4>
-    <h4>Sidste måneds betaling: @Model.Tilbagebetaling.SamletLån</h4>
 
     <script>
         //Pie chart controller
@@ -180,7 +140,7 @@
                 if (content.style.maxHeight) {
                     content.style.maxHeight = null;
                 } else {
-                    content.style.display = "flex";
+                    content.style.display = "inherit";
                     content.style.maxHeight = content.scrollHeight + "px";
                 }
             });
