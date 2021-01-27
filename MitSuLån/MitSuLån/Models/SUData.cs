@@ -21,7 +21,6 @@ namespace MitSuLån.Models
         public int MåndeligAfbetaling { get; set; }
         public int AntalTilbageBetalingsMåneder { get; set; }
 
-
         //Renter
         public double Rente { get; set; } 
         public double TillægsRente { get; set; }

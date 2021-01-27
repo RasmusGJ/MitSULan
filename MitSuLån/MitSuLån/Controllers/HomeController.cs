@@ -82,24 +82,30 @@ namespace MitSuLån.Controllers
             vm.Tilbagebetaling.SamletLån = vm.Mellem.SamletLån;
             vm.SamletLån = vm.Tilbagebetaling.SamletLån;
 
-            while (vm.Tilbagebetaling.SamletLån > vm.SUData.MåndeligAfbetaling)
-            {
-                vm.Tilbagebetaling.SamletLån = (vm.Tilbagebetaling.SamletLån - vm.SUData.MåndeligAfbetaling) * (1 + (vm.SUData.Diskonto + vm.SUData.TillægsRente));
+           /* if ()
+            {*/
+                while (vm.Tilbagebetaling.SamletLån > vm.SUData.MåndeligAfbetaling)
+                {
+                    vm.Tilbagebetaling.SamletLån = (vm.Tilbagebetaling.SamletLån - vm.SUData.MåndeligAfbetaling) * (1 + (vm.SUData.Diskonto + vm.SUData.TillægsRente));
+                    vm.SUData.AntalTilbageBetalingsMåneder++;
+                }
+
+                //Måneders afbetaling: 
                 vm.SUData.AntalTilbageBetalingsMåneder++;
-            }
 
-            //Måneders afbetaling: 
-            vm.SUData.AntalTilbageBetalingsMåneder++;
+                //Total pris på lån: 
+                vm.SamletLån = (vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån;
 
-            //Total pris på lån: 
-            vm.SamletLån = (vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån;
+                //Gebyr på periode:
+                vm.GebyrAfbetaling = vm.SamletLån - vm.Mellem.SamletLån;
 
-            //Gebyr på periode:
-            vm.GebyrAfbetaling = vm.SamletLån - vm.Mellem.SamletLån;
+                //Gebyr ved lån: 
+                vm.Tilbagebetaling.Gebyr = ((vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån) - (vm.SUData.MånedligSU * vm.SUData.AntalMåneder);
+           /* }
+            else
+            {
 
-            //Gebyr ved lån: 
-            vm.Tilbagebetaling.Gebyr = ((vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån) - (vm.SUData.MånedligSU * vm.SUData.AntalMåneder);
-
+            }*/
             return vm;
         }
     }

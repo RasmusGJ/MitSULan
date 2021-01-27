@@ -50,6 +50,10 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label class="input-label" asp-for="SUData.MånederFørAfbetaling"></label>
+                        <input class="input-field" placeholder="" asp-for="SUData.MånederFørAfbetaling" />
+                    </div>
+                    <div class="form-group">
                         <label class="input-label" asp-for="SUData.MåndeligAfbetaling"></label>
                         <input class="input-field-last" placeholder="" asp-for="SUData.MåndeligAfbetaling" />
                         <input style="margin:auto" type="submit" value="BEREGN" class="submit-btn" />
@@ -145,6 +149,8 @@
                 }
             });
         }
-    </script>
+     </script>
+    </div>
+
 </body>
 </html>
