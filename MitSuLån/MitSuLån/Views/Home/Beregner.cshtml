@@ -44,20 +44,25 @@
                         <input class="input-field" placeholder="" asp-for="SUData.MånederFørAfbetaling" />
                     </div>
                     <div class="form-group">
-                        <select class="input-field">
-                            <option>Beløb</option>
-                            <option>Måneder</option>
+                        <select class="input-field" onchange="selectMath(this.value)">
+                            <option value="0">Beløb</option>
+                            <option value="1" selected="selected">Måneder</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label class="input-label" asp-for="SUData.MånederFørAfbetaling"></label>
-                        <input class="input-field" placeholder="" asp-for="SUData.MånederFørAfbetaling" />
+                    <div class="form-group" style="display:flex;">
+                        <div class="left-option">
+                            <label class="input-label" asp-for="SUData.MånederFørAfbetaling"></label>
+                            <input class="input-field" id="month" placeholder="" asp-for="SUData.MånederFørAfbetaling" />
+                        </div>
+                        <div class="right-option">
+                            <label class="input-label">Månedlig Beløb</label>
+                            <input class="input-field" id="money" placeholder="" asp-for="SUData.MåndeligAfbetaling" disabled />
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="input-label" asp-for="SUData.MåndeligAfbetaling"></label>
-                        <input class="input-field-last" placeholder="" asp-for="SUData.MåndeligAfbetaling" />
-                        <input style="margin:auto" type="submit" value="BEREGN" class="submit-btn" />
+                        <input type="submit" value="BEREGN" class="submit-btn" />
                     </div>
+
                 </form>
             </div>
 
@@ -103,7 +108,7 @@
             </div>
         </div>
 
-    <script>
+        <script>
         //Pie chart controller
         var modelData = [@Model.Studie.EffektivKredit, @Model.Tilbagebetaling.Gebyr];
 
@@ -128,28 +133,18 @@
             }
         });
 
-        //Collapsable views controller
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
-
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
+            function selectMath(val) {
+                if (val === "0") {
+                    document.getElementById("month").disabled = true;
+                    document.getElementById("money").disabled = false;
                 }
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.display = "inherit";
-                    content.style.maxHeight = content.scrollHeight + "px";
+                else if (val === "1") {
+                    document.getElementById("money").disabled = true;
+                    document.getElementById("month").disabled = false;
                 }
-            });
-        }
-     </script>
+            }
+        </script>
+        <script src="~/js/collapsable.js"></script>
     </div>
 
 </body>
