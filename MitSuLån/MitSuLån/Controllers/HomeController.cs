@@ -82,8 +82,8 @@ namespace MitSuLån.Controllers
             vm.Tilbagebetaling.SamletLån = vm.Mellem.SamletLån;
             vm.SamletLån = vm.Tilbagebetaling.SamletLån;
 
-           /* if ()
-            {*/
+            if (vm.SUData.AntalTilbageBetalingsMåneder == 0)
+            {
                 while (vm.Tilbagebetaling.SamletLån > vm.SUData.MåndeligAfbetaling)
                 {
                     vm.Tilbagebetaling.SamletLån = (vm.Tilbagebetaling.SamletLån - vm.SUData.MåndeligAfbetaling) * (1 + (vm.SUData.Diskonto + vm.SUData.TillægsRente));
@@ -101,11 +101,11 @@ namespace MitSuLån.Controllers
 
                 //Gebyr ved lån: 
                 vm.Tilbagebetaling.Gebyr = ((vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån) - (vm.SUData.MånedligSU * vm.SUData.AntalMåneder);
-           /* }
+            }
             else
             {
-
-            }*/
+                
+            }
             return vm;
         }
     }

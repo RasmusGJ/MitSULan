@@ -68,6 +68,20 @@ input[type=number] {
     flex: 40%;
 }
 
+.field1 {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.static-text-dkk {
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    color: #999;
+    font-size: 12px;
+}
+
 .input-group1 {
     background-color: #ffffff;
     border: solid;
@@ -104,6 +118,7 @@ input[type=number] {
 .right-option {
     width: 45%;
     float: right;
+    margin-left: 25px;
 }
 
 .submit-btn {
@@ -114,6 +129,7 @@ input[type=number] {
     height: 37px;
     width: 100%;
     border: none;
+    border-radius: 2px;
 }
 
 /*Collapsible section*/
@@ -139,27 +155,6 @@ input[type=number] {
     transition: color 0.2s ease-out;
     transition: background-color 0.2s ease-out;
 }
-
-/* ICON SETTINGS */
-/* enable absolute positioning */
-.inner-addon { 
-    position: relative; 
-}
-
-/* style icon */
-.inner-addon .fa {
-  position: absolute;
-  padding: 12px;
-  pointer-events: none;
-}
-
-/* align icon */
-.left-addon .fa  { left:  0px;}
-.right-addon .fa { right: 0px;}
-
-/* add padding  */
-.left-addon input  { padding-left:  20px; }
-.right-addon input { padding-right: 20px; }
 
 /* Sticky footer styles
 -------------------------------------------------- */

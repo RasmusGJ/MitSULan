@@ -19,7 +19,7 @@ namespace MitSuLån.Models
         public double MånedligSU { get; set; }
         public int MånederFørAfbetaling { get; set; }
         public int MåndeligAfbetaling { get; set; }
-        public int AntalTilbageBetalingsMåneder { get; set; }
+        public int AntalTilbageBetalingsMåneder { get; set; } = 0;
 
         //Renter
         public double Rente { get; set; } 
