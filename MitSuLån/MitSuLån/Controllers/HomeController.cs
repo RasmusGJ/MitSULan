@@ -104,8 +104,36 @@ namespace MitSuLån.Controllers
             }
             else
             {
-                
+                vm.SUData.ClientSideChecker = false;
+                List<double> iterationer = new List<double>();
+                double iteration = 0;
+
+                for(int i = 0; i < vm.SUData.AntalTilbageBetalingsMåneder;)
+                {
+                    iteration = (vm.SamletLån / vm.SUData.AntalTilbageBetalingsMåneder);
+                    vm.SamletLån =  (vm.SamletLån - (vm.SamletLån / vm.SUData.AntalTilbageBetalingsMåneder)) * (1 + (vm.SUData.Diskonto + vm.SUData.TillægsRente));
+                    iterationer.Add(iteration);
+                    vm.SUData.AntalTilbageBetalingsMåneder--;
+                }
+
+                vm.SUData.AntalTilbageBetalingsMåneder = iterationer.Count;
+
+                //Total pris på lån: 
+                foreach (int j in iterationer)
+                 {
+                    vm.SamletLån += j;
+                 }
+
+                //Gebyr på periode:
+                vm.GebyrAfbetaling = vm.SamletLån - vm.Mellem.SamletLån;
+
+                //Gebyr ved lån: 
+                vm.Tilbagebetaling.Gebyr = vm.SamletLån - (vm.SUData.MånedligSU * vm.SUData.AntalMåneder);
+
+                //Gennemsnit
+                vm.SUData.GennemsnitligAfbetaling = vm.SamletLån / vm.SUData.AntalTilbageBetalingsMåneder;
             }
+
             return vm;
         }
     }

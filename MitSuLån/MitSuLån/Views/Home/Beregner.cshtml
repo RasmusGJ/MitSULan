@@ -53,7 +53,7 @@
                     <div class="form-group" style="display:flex;">
                         <div class="left-option">
                             <label class="input-label">MånedersAfbetaling</label>
-                            <input class="input-field" id="month" asp-for="SUData.MånederFørAfbetaling" />
+                            <input class="input-field" id="month" asp-for="SUData.AntalTilbageBetalingsMåneder" />
                         </div>
                         <div class="right-option">
                             <label class="input-label">Månedlig Beløb</label>
@@ -103,7 +103,16 @@
                         <p>Samlet Lån: @Model.SamletLån</p>
                         <p>Gebyr på Lån: @Model.Tilbagebetaling.Gebyr</p>
                         <p>Gebyr på Periode: @Model.GebyrAfbetaling</p>
-                        <p>Sidste måneds betaling: @Model.Tilbagebetaling.SamletLån</p>
+
+                        @if (Model.SUData.ClientSideChecker == true)
+                        {
+                            <p>Sidste måneds betaling: @Model.Tilbagebetaling.SamletLån</p>
+                        }
+                        else
+                        {
+                            <p>Sidste måneds betaling: @Model.SUData.GennemsnitligAfbetaling</p>
+                        }
+
                     </div>
                 </div>
             </div>
