@@ -83,34 +83,35 @@
             <div class="timeline">
                 <div class="timeline-container left">
                     <div class="content">
-                        <h4>Lån Under Studie</h4>
-                        <p>Effektiv Kredit: @Model.Studie.EffektivKredit</p>
-                        <p>Samlet Lån: @Model.Studie.SamletLån</p>
-                        <p>Gebyr på Periode: @Model.Studie.Gebyr</p>
+                        <h4 style="margin-bottom: 20px;">Lån Under Studie</h4>
+                        <label>Effektiv Kredit: @Model.Studie.EffektivKredit</label>
+                        <label>Samlet Lån: @Model.Studie.SamletLån</label>
+                        <label>Gebyr på Periode: @Model.Studie.Gebyr</label>
                     </div>
                 </div>
                 <div class="timeline-container right">
                     <div class="content">
-                        <h4>Lån mellem Studie og Tilbagebetaling</h4>
-                        <p>Samlet Lån: @Model.Mellem.SamletLån</p>
-                        <p>Gebyr på Periode: @Model.Mellem.Gebyr</p>
+                        <h4 style="margin-bottom: 20px;">Lån mellem Studie og Tilbagebetaling</h4>
+                        <label>Samlet Lån: @Math.Round(Model.Mellem.SamletLån, MidpointRounding.AwayFromZero)</label>
+                        <label>Gebyr på Periode: @Model.Mellem.Gebyr</label>
                     </div>
                 </div>
                 <div class="timeline-container left">
                     <div class="content">
-                        <h4>Lån under Tilbagebetaling</h4>
-                        <p>Måneders Afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</p>
-                        <p>Samlet Lån: @Model.SamletLån</p>
-                        <p>Gebyr på Lån: @Model.Tilbagebetaling.Gebyr</p>
-                        <p>Gebyr på Periode: @Model.GebyrAfbetaling</p>
+                        <h4 style="margin-bottom: 20px;">Lån under Tilbagebetaling</h4>
+                        <label>Måneders Afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</label>
+                        <label>Samlet Lån: @Model.SamletLån</label>
+                        <label>Gebyr på Lån: @Model.Tilbagebetaling.Gebyr</label>
+                        <label>Gebyr på Periode: @Model.GebyrAfbetaling</label>
 
                         @if (Model.SUData.ClientSideChecker == true)
                         {
                             <p>Sidste måneds betaling: @Model.Tilbagebetaling.SamletLån</p>
+
                         }
-                        else
+                        else if (Model.SUData.ClientSideChecker == false)
                         {
-                            <p>Sidste måneds betaling: @Model.SUData.GennemsnitligAfbetaling</p>
+                            <p>Gennemsnitlige Afbetaling: @Model.SUData.GennemsnitligAfbetaling</p>
                         }
 
                     </div>
