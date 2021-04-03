@@ -28,7 +28,7 @@ namespace MitSuLån.Controllers
         {
             ViewModel vm = new ViewModel();
             vm.Studie.EffektivKredit = 200.0;
-            vm.Tilbagebetaling.Gebyr = 20.0;
+            vm.Studie.Gebyr = 10.0;
 
             return View(vm);
         }
@@ -39,7 +39,8 @@ namespace MitSuLån.Controllers
             return View(FillViewModel(vm));
         }
 
-        public IActionResult Privacy()
+        [Route("info")]
+        public IActionResult Info()
         {
             return View();
         }
@@ -101,6 +102,8 @@ namespace MitSuLån.Controllers
 
                 //Gebyr ved lån: 
                 vm.Tilbagebetaling.Gebyr = ((vm.SUData.AntalTilbageBetalingsMåneder - 1) * vm.SUData.MåndeligAfbetaling + vm.Tilbagebetaling.SamletLån) - (vm.SUData.MånedligSU * vm.SUData.AntalMåneder);
+                vm.Tilbagebetaling.Piechartdata = vm.Tilbagebetaling.Gebyr - vm.Studie.Gebyr;
+
             }
             else
             {
@@ -132,6 +135,8 @@ namespace MitSuLån.Controllers
 
                 //Gennemsnit
                 vm.SUData.GennemsnitligAfbetaling = vm.SamletLån / vm.SUData.AntalTilbageBetalingsMåneder;
+
+                vm.Tilbagebetaling.Piechartdata = vm.Tilbagebetaling.Gebyr - vm.Studie.Gebyr;
             }
 
             return vm;

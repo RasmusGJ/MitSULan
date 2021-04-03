@@ -10,5 +10,6 @@ namespace MitSuLån.Models
         public double EffektivKredit { get; set; } = 1.0;
         public double SamletLån { get; set; }
         public double Gebyr { get; set; } = 1.0;
+        public double Piechartdata { get; set; } = 1.0;
     }
 }

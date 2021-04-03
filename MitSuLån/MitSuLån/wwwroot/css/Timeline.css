@@ -21,17 +21,18 @@
 }
 
 /* The actual timeline (the vertical ruler) */
-.timeline::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    background-color: grey;
-    border-radius: 15px;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -3px;
-}
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        background-color: #313947;
+        border-radius: 15px;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+        margin-bottom: 100px;
+    }
 
 /* Container around content */
 .timeline-container {

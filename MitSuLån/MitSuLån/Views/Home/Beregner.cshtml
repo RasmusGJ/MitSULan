@@ -9,20 +9,20 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/Timeline.css" />
     <link rel="stylesheet" href="~/css/select.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>View</title>
 </head>
 <body>
     <div class="beregner-container">
 
-        <h1 class="beregner-title">SU Låne Beregner</h1>
+        <h1 class="beregner-title">SU Låneberegner</h1>
 
         <p class="description">
-            Gør du dig tanker omkring et SU lån? <br>
-            Denne låne beregner giver dig et estimat over et SU lån der er tilpasset lige til dig.
+            Overvejer du at tage et studielån?<br>
+            Denne låne beregner giver dig et estimat over renteudgifterne på dit studielån.
         </p>
 
         <div class="row1">
@@ -30,34 +30,68 @@
             <div class="input-group0">
                 <form action="Beregner" method="post">
                     <div class="field1">
-                        <label class="input-label" asp-for="SUData.MånedligSU"></label>
+                        <div style="display:flex;">
+                            <label class="input-label" asp-for="SUData.MånedligSU">Månedlige lånebeløb</label>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle"></i>
+                                <span class="tooltiptext">Op til 3.234 kr. pr. måned, hvis du ikke søger om forhøjet lån.</span>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="static-text-dkk">DKK</label>
-                            <input class="input-field" asp-for="SUData.MånedligSU" />
+                            <input min="1" max="9999" class="input-field" asp-for="SUData.MånedligSU" />
+
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="input-label" asp-for="SUData.AntalMåneder"></label>
-                        <input class="input-field" asp-for="SUData.AntalMåneder" />
+                        <div style="display:flex;">
+                            <label class="input-label" asp-for="SUData.AntalMåneder">Låneperiode (antal måneder)</label>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle"></i>
+                                <span class="tooltiptext">
+                                    Du kan tage SU-lån, så længe du modtager SU.
+                                    Renten under din uddannelse er diskontoen + 4%.
+                                </span>
+                            </div>
+                        </div>
+                        <input class="input-field" min="1" max="999" asp-for="SUData.AntalMåneder" />
                     </div>
                     <div class="form-group" style="margin-bottom: 35px;">
-                        <label class="input-label" asp-for="SUData.MånederFørAfbetaling"></label>
-                        <input class="input-field" asp-for="SUData.MånederFørAfbetaling" />
+                        <div style="display:flex;">
+                            <label class="input-label" asp-for="SUData.MånederFørAfbetaling">Måneder før afbetaling</label>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle"></i>
+                                <span class="tooltiptext">
+                                    Afdragsfrie måneder inden du påbegynder tilbagebetalingen. Se INFO for mere information.
+                                    Renten i denne periode er diskontoen + 1%.
+                                </span>
+                            </div>
+                        </div>
+                        <input class="input-field" min="1" max="24" asp-for="SUData.MånederFørAfbetaling" />
                     </div>
                     <div class="form-group">
-                        <select class="select-payment" onchange="selectMath(this.value)">
-                            <option value="0">Beløb</option>
-                            <option value="1" selected="selected">Måneder</option>
-                        </select>
+                        <div style="display:flex;">
+                            <select class="select-payment" onchange="selectMath(this.value)">
+                                <option value="0">Beløb</option>
+                                <option value="1" selected="selected">Måneder</option>
+                            </select>
+                            <div class="tooltip">
+                                <i class="fa fa-info-circle"></i>
+                                <span class="tooltiptext">
+                                    Vælg enten antal måneder, du vil afbetale over (maks. 180 måneder), 
+                                    eller beløbet du vil tilbagebetale pr. måned.
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group" style="display:flex;">
                         <div class="left-option">
-                            <label class="input-label">MånedersAfbetaling</label>
-                            <input class="input-field" id="month" asp-for="SUData.AntalTilbageBetalingsMåneder" />
+                            <label class="input-label">Måneders afbetaling</label>
+                            <input class="input-field" id="month" min="1" max="180" asp-for="SUData.AntalTilbageBetalingsMåneder" />
                         </div>
                         <div class="right-option">
-                            <label class="input-label">Månedlig Beløb</label>
-                            <input class="input-field" id="money" value=" " asp-for="SUData.MåndeligAfbetaling" disabled />
+                            <label class="input-label">Månedlig ydelse</label>
+                            <input class="input-field" id="money" value=" " min="1" asp-for="SUData.MåndeligAfbetaling" disabled />
                         </div>
                     </div>
                     <div class="form-group">
@@ -76,42 +110,45 @@
             </div>
         </div>
 
-        <button type="button" class="collapsible"> <i class="fa fa-arrow-down" style="float:right;"></i>Se dit låns levetid</button>
+        <button type="button" class="collapsible"> <i class="fa fa-arrow-down" style="float:right;"></i>Detaljeret oversigt</button>
 
         <div class="timeline-thingy">
 
             <div class="timeline">
                 <div class="timeline-container left">
                     <div class="content">
-                        <h4 style="margin-bottom: 20px;">Lån Under Studie</h4>
-                        <label>Effektiv Kredit: @Model.Studie.EffektivKredit</label>
-                        <label>Samlet Lån: @Model.Studie.SamletLån</label>
-                        <label>Gebyr på Periode: @Model.Studie.Gebyr</label>
+                        <h4 style="margin-bottom: 20px;font-weight: 600;">Lån under studie</h4>
+                        <div style="display:flex">
+                            <label>Hovedstol:</label>
+                            <label class="loan-data">  @Model.Studie.EffektivKredit kr.</label>
+                        </div>
+                        <label>Renteudgifter under studiet: @Math.Round(Model.Studie.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
+                        <label>Samlet gæld: @Math.Round(Model.Studie.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
                     </div>
                 </div>
                 <div class="timeline-container right">
                     <div class="content">
-                        <h4 style="margin-bottom: 20px;">Lån mellem Studie og Tilbagebetaling</h4>
-                        <label>Samlet Lån: @Math.Round(Model.Mellem.SamletLån, MidpointRounding.AwayFromZero)</label>
-                        <label>Gebyr på Periode: @Model.Mellem.Gebyr</label>
+                        <h4 style="margin-bottom: 20px;font-weight: 600;">Lån mellem studie og tilbagebetaling</h4>
+                        <label>Renteudgifter under den afdragsfrie periode: @Math.Round(Model.Mellem.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
+                        <label>Samlet gæld: @Math.Round(Model.Mellem.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
                     </div>
                 </div>
                 <div class="timeline-container left">
                     <div class="content">
-                        <h4 style="margin-bottom: 20px;">Lån under Tilbagebetaling</h4>
-                        <label>Måneders Afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</label>
-                        <label>Samlet Lån: @Model.SamletLån</label>
-                        <label>Gebyr på Lån: @Model.Tilbagebetaling.Gebyr</label>
-                        <label>Gebyr på Periode: @Model.GebyrAfbetaling</label>
+                        <h4 style="margin-bottom: 20px; font-weight: 600;">Lån under tilbagebetaling</h4>
+                        <label>Renteudgifter under tilbagebetaling: @Math.Round(Model.GebyrAfbetaling, MidpointRounding.AwayFromZero) kr.</label>
+                        <label>Samlede renteudgifter: @Math.Round(Model.Tilbagebetaling.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
+                        <label>Samlet gæld: @Math.Round(Model.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
+                        <label>Måneders afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</label>
 
                         @if (Model.SUData.ClientSideChecker == true)
                         {
-                            <p>Sidste måneds betaling: @Model.Tilbagebetaling.SamletLån</p>
+                    <p>Sidste måneds betaling: @Math.Round(Model.Tilbagebetaling.SamletLån, MidpointRounding.AwayFromZero) kr.</p>
 
                         }
                         else if (Model.SUData.ClientSideChecker == false)
                         {
-                            <p>Gennemsnitlige Afbetaling: @Model.SUData.GennemsnitligAfbetaling</p>
+                    <p>Gennemsnitlige afbetaling: @Math.Round(Model.SUData.GennemsnitligAfbetaling, MidpointRounding.AwayFromZero) kr.</p>
                         }
 
                     </div>
@@ -121,22 +158,20 @@
 
         <script>
         //Pie chart controller
-        var modelData = [@Model.Studie.EffektivKredit, @Model.Tilbagebetaling.Gebyr];
+        var modelData = [@Model.Studie.EffektivKredit, @Math.Round(Model.Studie.Gebyr, MidpointRounding.AwayFromZero), @Math.Round(Model.Tilbagebetaling.Piechartdata, MidpointRounding.AwayFromZero)];
 
         new Chart(document.getElementById("myChart"), {
             type: 'pie',
             data: {
-                labels: ["Effektiv Kredit", "Renter"],
+                labels: ["Hovedstol", "Renter under studie", "Renter efter studie"],
                 datasets: [{
-                    label: "Population (millions)",
-                    backgroundColor: ["#3e95cd", "#8e5ea2"],
-                    data: [modelData[0], modelData[1]]
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#b3101e"],
+                    data: [modelData[0], modelData[1], modelData[2]]
                 }]
             },
             options: {
                 title: {
                     display: true,
-                    text: 'Renter under tilbagebetaling inkluderet.'
                 },
                 legend: {
                     position: 'right'
@@ -164,3 +199,4 @@
 
 </body>
 </html>
+-

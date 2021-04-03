@@ -112,11 +112,11 @@ input[type=number] {
 }
 
 .left-option{
-    width: 45%;
+    width: 47%;
 }
 
 .right-option {
-    width: 45%;
+    width: 43%;
     float: right;
     margin-left: 25px;
 }
@@ -131,6 +131,38 @@ input[type=number] {
     border: none;
     border-radius: 2px;
 }
+/* Tooltip container */
+.tooltip {
+    margin-left: 10px;
+    margin-top: 1px;
+    position: relative;
+    opacity: 1;
+    float: right;
+}
+
+/* Tooltip text */
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 380px;
+        background-color: #dbdbdb;
+        color: black;
+        text-align: left;
+        padding: 15px 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 6px;
+        /* Position the tooltip text - see examples below! */
+        position: absolute;
+        z-index: 1;
+        top: -5px;
+        left: 175%;
+    }
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
 
 /*Collapsible section*/
 .collapsible {
@@ -149,11 +181,17 @@ input[type=number] {
 }
 
 .active, .collapsible:hover {
-    background-color: #a9bdd6;
+    background-color: #5999ff;
     opacity: 1;
     color: white;
     transition: color 0.2s ease-out;
     transition: background-color 0.2s ease-out;
+}
+
+.loan-data {
+    font-weight: 600;
+    padding-left: 5px;
+    color: #293959;
 }
 
 /* Sticky footer styles
