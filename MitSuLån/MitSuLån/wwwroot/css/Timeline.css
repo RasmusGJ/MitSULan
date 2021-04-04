@@ -24,14 +24,15 @@
     .timeline::after {
         content: '';
         position: absolute;
-        width: 6px;
+        width: 4px;
         background-color: #313947;
         border-radius: 15px;
         top: 0;
         bottom: 0;
         left: 50%;
         margin-left: -3px;
-        margin-bottom: 100px;
+        margin-bottom: 295px;
+        
     }
 
 /* Container around content */
@@ -48,7 +49,7 @@
     position: absolute;
     width: 25px;
     height: 25px;
-    right: -17px;
+    right: -12px;
     background-color: white;
     border: 4px solid #0094ff;
     top: 20px;
@@ -96,7 +97,7 @@
 
 /* Fix the circle for containers on the right side */
 .right::after {
-    left: -16px;
+    left: -13px;
 }
 
 /* The actual content */
@@ -105,6 +106,9 @@
     background-color: #edf0f2;
     position: relative;
     border-radius: 6px;
+}
+
+.data-seperator {
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
@@ -130,12 +134,16 @@
     }
 
     /* Make sure all circles are at the same spot */
-    .left::after, .right::after {
+    .left::after{
         left: 15px;
     }
-
+    .right::after{
+        left: 18px;
+    }
     /* Make all right containers behave like the left ones */
     .right {
         left: 0%;
     }
+
+    
 }

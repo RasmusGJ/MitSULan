@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label class="static-text-dkk">DKK</label>
-                            <input min="1" max="9999" class="input-field" asp-for="SUData.MånedligSU" />
+                            <input min="1" max="9999" class="input-field" value=" "  asp-for="SUData.MånedligSU" />
 
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                                 </span>
                             </div>
                         </div>
-                        <input class="input-field" min="1" max="999" asp-for="SUData.AntalMåneder" />
+                        <input class="input-field" min="1" max="999" value=" " asp-for="SUData.AntalMåneder" />
                     </div>
                     <div class="form-group" style="margin-bottom: 35px;">
                         <div style="display:flex;">
@@ -67,7 +67,7 @@
                                 </span>
                             </div>
                         </div>
-                        <input class="input-field" min="1" max="24" asp-for="SUData.MånederFørAfbetaling" />
+                        <input class="input-field" min="1" max="24" value=" " asp-for="SUData.MånederFørAfbetaling" />
                     </div>
                     <div class="form-group">
                         <div style="display:flex;">
@@ -87,7 +87,7 @@
                     <div class="form-group" style="display:flex;">
                         <div class="left-option">
                             <label class="input-label">Måneders afbetaling</label>
-                            <input class="input-field" id="month" min="1" max="180" asp-for="SUData.AntalTilbageBetalingsMåneder" />
+                            <input class="input-field" id="month" min="1" max="180" value=" " asp-for="SUData.AntalTilbageBetalingsMåneder" />
                         </div>
                         <div class="right-option">
                             <label class="input-label">Månedlig ydelse</label>
@@ -118,37 +118,56 @@
                 <div class="timeline-container left">
                     <div class="content">
                         <h4 style="margin-bottom: 20px;font-weight: 600;">Lån under studie</h4>
-                        <div style="display:flex">
+                        <div class="data-seperator">
                             <label>Hovedstol:</label>
-                            <label class="loan-data">  @Model.Studie.EffektivKredit kr.</label>
+                            <label class="loan-data">@Model.Studie.EffektivKredit kr.</label>
                         </div>
-                        <label>Renteudgifter under studiet: @Math.Round(Model.Studie.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
-                        <label>Samlet gæld: @Math.Round(Model.Studie.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
+                        <div class="data-seperator">
+                            <label>Renteudgifter under studiet: </label>
+                            <label class="loan-data">@Math.Round(Model.Studie.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
+                        </div>
+                        <div class="data-seperator">
+                            <label>Samlet gæld: </label>
+                            <label class="loan-data">@Math.Round(Model.Studie.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
+                        </div>
+
                     </div>
                 </div>
                 <div class="timeline-container right">
                     <div class="content">
                         <h4 style="margin-bottom: 20px;font-weight: 600;">Lån mellem studie og tilbagebetaling</h4>
-                        <label>Renteudgifter under den afdragsfrie periode: @Math.Round(Model.Mellem.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
-                        <label>Samlet gæld: @Math.Round(Model.Mellem.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
+                        <div class="data-seperator">
+                            <label>Renteudgifter under den afdragsfrie periode: </label>
+                            <label class="loan-data">@Math.Round(Model.Mellem.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
+                        </div>
+                        <div class="data-seperator">
+                            <label>Samlet gæld: </label>
+                            <label class="loan-data">@Math.Round(Model.Mellem.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
+                        </div>
                     </div>
                 </div>
                 <div class="timeline-container left">
                     <div class="content">
                         <h4 style="margin-bottom: 20px; font-weight: 600;">Lån under tilbagebetaling</h4>
-                        <label>Renteudgifter under tilbagebetaling: @Math.Round(Model.GebyrAfbetaling, MidpointRounding.AwayFromZero) kr.</label>
-                        <label>Samlede renteudgifter: @Math.Round(Model.Tilbagebetaling.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
-                        <label>Samlet gæld: @Math.Round(Model.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
-                        <label>Måneders afbetaling: @Model.SUData.AntalTilbageBetalingsMåneder</label>
+                        <label>Renteudgifter under tilbagebetaling:</label>
+                        <label class="loan-data">@Math.Round(Model.GebyrAfbetaling, MidpointRounding.AwayFromZero) kr.</label>
+                        <label>Samlede renteudgifter: </label>
+                        <label class="loan-data">@Math.Round(Model.Tilbagebetaling.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
+                        <label>Samlet gæld: </label>
+                        <label class="loan-data">@Math.Round(Model.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
+                        <label>Måneders afbetaling: </label>
+                        <label class="loan-data">@Model.SUData.AntalTilbageBetalingsMåneder</label>
 
                         @if (Model.SUData.ClientSideChecker == true)
                         {
-                    <p>Sidste måneds betaling: @Math.Round(Model.Tilbagebetaling.SamletLån, MidpointRounding.AwayFromZero) kr.</p>
+                            <p>Sidste måneds betaling: </p>
+                            <p class="loan-data">@Math.Round(Model.Tilbagebetaling.SamletLån, MidpointRounding.AwayFromZero) kr.</p>
 
                         }
                         else if (Model.SUData.ClientSideChecker == false)
                         {
-                    <p>Gennemsnitlige afbetaling: @Math.Round(Model.SUData.GennemsnitligAfbetaling, MidpointRounding.AwayFromZero) kr.</p>
+                            <p>Gennemsnitlige afbetaling: </p>
+                            <p class="loan-data">@Math.Round(Model.SUData.GennemsnitligAfbetaling, MidpointRounding.AwayFromZero) kr.</p>
                         }
 
                     </div>
@@ -165,7 +184,7 @@
             data: {
                 labels: ["Hovedstol", "Renter under studie", "Renter efter studie"],
                 datasets: [{
-                    backgroundColor: ["#3e95cd", "#8e5ea2", "#b3101e"],
+                    backgroundColor: ["#3e95cd", "#ffd333", "#b3101e"],
                     data: [modelData[0], modelData[1], modelData[2]]
                 }]
             },
