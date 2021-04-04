@@ -194,10 +194,31 @@ input[type=number] {
     color: #293959;
 }
 
+.end-container {
+    background-color: #edf0f2;
+    padding: 40px;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 50px;
+    text-align:center;
+}
+
+.end-data0 {
+    font-size: 50px;
+    font-weight: 700;
+    color: #293959;
+    text-align: center;
+}
+.end-data1 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #293959;
+    text-align: center;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {

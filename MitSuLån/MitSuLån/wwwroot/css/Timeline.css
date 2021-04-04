@@ -31,8 +31,8 @@
         bottom: 0;
         left: 50%;
         margin-left: -3px;
-        margin-bottom: 295px;
-        
+        margin-bottom: -9px;
+        margin-top: 25px;
     }
 
 /* Container around content */
@@ -106,9 +106,6 @@
     background-color: #edf0f2;
     position: relative;
     border-radius: 6px;
-}
-
-.data-seperator {
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
