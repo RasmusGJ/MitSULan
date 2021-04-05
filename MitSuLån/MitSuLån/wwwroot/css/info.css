@@ -1,0 +1,23 @@
+﻿.info-title {
+    margin-left: 120px;
+    margin-right: 120px;
+    margin-top: 40px;
+}
+
+.info-intro {
+    margin-left: 120px;
+    margin-right: 120px;
+    font-style:italic;
+}
+
+.info-points {
+    margin-left: 120px;
+    margin-right: 120px;
+    margin-top: 40px;
+    font-weight: 700;
+}
+
+.info-points-text {
+    margin-left: 120px;
+    margin-right: 120px;
+}

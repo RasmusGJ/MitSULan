@@ -1,6 +1,7 @@
 ﻿@model MitSuLån.Models.ViewModel
 
 @{
+    ViewData["Title"] = "Beregner";
     Layout = "_Layout";
 }
 
@@ -120,15 +121,15 @@
                         <h4 style="margin-bottom: 20px;font-weight: 600;">Lån under studie</h4>
                         <div class="data-seperator">
                             <label>Hovedstol:</label>
-                            <label class="loan-data">@Model.Studie.EffektivKredit kr.</label>
+                            <label class="loan-data">@Model.Studie.EffektivKredit.ToString("N0") kr.</label>
                         </div>
                         <div class="data-seperator">
                             <label>Renteudgifter under studiet: </label>
-                            <label class="loan-data">@Math.Round(Model.Studie.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
+                            <label class="loan-data">@Math.Round(Model.Studie.Gebyr, MidpointRounding.AwayFromZero).ToString("N0") kr.</label>
                         </div>
                         <div class="data-seperator">
                             <label>Samlet gæld: </label>
-                            <label class="loan-data">@Math.Round(Model.Studie.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
+                            <label class="loan-data">@Math.Round(Model.Studie.SamletLån, MidpointRounding.AwayFromZero).ToString("N0") kr.</label>
                         </div>
 
                     </div>
@@ -138,11 +139,11 @@
                         <h4 style="margin-bottom: 20px;font-weight: 600;">Lån mellem studie og tilbagebetaling</h4>
                         <div class="data-seperator">
                             <label>Renteudgifter under den afdragsfrie periode: </label>
-                            <label class="loan-data">@Math.Round(Model.Mellem.Gebyr, MidpointRounding.AwayFromZero) kr.</label>
+                            <label class="loan-data">@Math.Round(Model.Mellem.Gebyr, MidpointRounding.AwayFromZero).ToString("N0") kr.</label>
                         </div>
                         <div class="data-seperator">
                             <label>Samlet gæld: </label>
-                            <label class="loan-data">@Math.Round(Model.Mellem.SamletLån, MidpointRounding.AwayFromZero) kr.</label>
+                            <label class="loan-data">@Math.Round(Model.Mellem.SamletLån, MidpointRounding.AwayFromZero).ToString("N0") kr.</label>
                         </div>
                     </div>
                 </div>
@@ -150,20 +151,20 @@
                     <div class="content">
                         <h4 style="margin-bottom: 20px; font-weight: 600;">Lån under tilbagebetaling</h4>
                         <label>Renteudgifter under tilbagebetaling:</label>
-                        <label class="loan-data">@Math.Round(Model.GebyrAfbetaling, MidpointRounding.AwayFromZero) kr.</label>
+                        <label class="loan-data">@Math.Round(Model.GebyrAfbetaling, MidpointRounding.AwayFromZero).ToString("N0") kr.</label>
                         <label>Måneders afbetaling: </label>
                         <label class="loan-data">@Model.SUData.AntalTilbageBetalingsMåneder</label>
 
                         @if (Model.SUData.ClientSideChecker == true)
                         {
                             <p>Sidste måneds betaling: </p>
-                            <p class="loan-data">@Math.Round(Model.Tilbagebetaling.SamletLån, MidpointRounding.AwayFromZero) kr.</p>
+                            <p class="loan-data">@Math.Round(Model.Tilbagebetaling.SamletLån, MidpointRounding.AwayFromZero).ToString("N0") kr.</p>
 
                         }
                         else if (Model.SUData.ClientSideChecker == false)
                         {
                             <p>Gennemsnitlige afbetaling: </p>
-                            <p class="loan-data">@Math.Round(Model.SUData.GennemsnitligAfbetaling, MidpointRounding.AwayFromZero) kr.</p>
+                            <p class="loan-data">@Math.Round(Model.SUData.GennemsnitligAfbetaling, MidpointRounding.AwayFromZero).ToString("N0") kr.</p>
                         }
 
                     </div>
@@ -172,11 +173,11 @@
                 </div>
             </div>
             <div class="end-container">
-                <h5>Samlet gæld</h5>
-                <p class="end-data0">@Math.Round(Model.SamletLån, MidpointRounding.AwayFromZero) kr.</p>
-                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-                <h5>Pris på lån</h5>
-                <p class="end-data1">@Math.Round(Model.Tilbagebetaling.Gebyr, MidpointRounding.AwayFromZero) kr.</p>
+                <h5 style="color:#3b3b3b;">Samlet gæld</h5>
+                <p class="end-data0">@Math.Round(Model.SamletLån, MidpointRounding.AwayFromZero).ToString("N0") kr.</p>
+                <hr style="height:2px;border-width:0;color:black;background-color:#3b3b3b;">
+                <h5 style="color:#3b3b3b;">Pris på lån</h5>
+                <p class="end-data1">@Math.Round(Model.Tilbagebetaling.Gebyr, MidpointRounding.AwayFromZero).ToString("N0") kr.</p>
             </div>
 
 
